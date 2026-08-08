@@ -1,0 +1,11 @@
+/* Copyright 2026 上海如静知华信息科技有限公司 */
+package cn.zhuatech.invoiceagent.config;
+import cn.zhuatech.invoiceagent.model.*; import cn.zhuatech.invoiceagent.repository.*; import org.springframework.boot.CommandLineRunner; import org.springframework.context.annotation.*; import org.springframework.security.crypto.password.PasswordEncoder; import java.time.LocalDate; import java.util.List;
+@Configuration public class DataInitializer {
+ @Bean CommandLineRunner seed(OperatingUnitRepository units,WorkRecordRepository records,ResourceRegisterRepository resources,ReviewRecordRepository reviews,UserRepository users,PasswordEncoder encoder){return args->{if(units.count()>0)return;
+  OperatingUnit first=units.save(new OperatingUnit("FIN-AP","应付审核组","财务共享中心",3200)),second=units.save(new OperatingUnit("FIN-TAX","财税规则组","财务中心",1400)),third=units.save(new OperatingUnit("FIN-PROC","采购结算组","供应链中心",1600));
+  WorkRecord a=records.save(new WorkRecord("INV-260808-518","INVOICE-SERVICE","云服务采购专票批次",first,120,84,6,LocalDate.now(),WorkRecord.Status.RELEASED,"TAX-V7")); WorkRecord b=records.save(new WorkRecord("INV-260808-477","INVOICE-LOGISTICS","七月物流费用发票",third,98,98,0,LocalDate.now(),WorkRecord.Status.COMPLETED,"TAX-V6")); WorkRecord c=records.save(new WorkRecord("INV-260808-529","INVOICE-EQUIPMENT","生产设备预付款发票",second,42,19,4,LocalDate.now().plusDays(1),WorkRecord.Status.RUNNING,"TAX-V7"));
+  resources.saveAll(List.of(new ResourceRegister("INV-OCR-01","发票票面识别服务",first,ResourceRegister.Status.RUNNING,98),new ResourceRegister("INV-MATCH-02","合同订单收货匹配器",third,ResourceRegister.Status.RUNNING,94),new ResourceRegister("INV-RISK-03","重复与税务异常审查器",second,ResourceRegister.Status.ALARM,80)));
+  reviews.saveAll(List.of(new ReviewRecord("REV-INV-028",a,"重复票风险",26,2,ReviewRecord.Result.PENDING,"许岚"),new ReviewRecord("REV-INV-017",b,"四单匹配",40,0,ReviewRecord.Result.PASSED,"宋屿"),new ReviewRecord("REV-INV-039",c,"税务规则",18,4,ReviewRecord.Result.FAILED,"温衡")));
+  String demo=encoder.encode("Demo@2026"); users.saveAll(List.of(new UserAccount("operator",demo,"宋屿",UserAccount.Role.DOMAIN_USER,"FIN-AP"),new UserAccount("planner",demo,"许岚",UserAccount.Role.DOMAIN_OPERATOR,null),new UserAccount("quality",demo,"财税审核负责人",UserAccount.Role.QUALITY,null),new UserAccount("admin",encoder.encode("ZhuaTech@2026"),"系统管理员",UserAccount.Role.ADMIN,null)));
+ };}}
