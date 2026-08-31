@@ -54,3 +54,15 @@ npm run dev:demo
 | ![微信二维码一](docs/images/zhuatech-wechat-consulting.png) | ![微信二维码二](docs/images/zhuatech-wechat-consulting-2.png) |
 
 SEO：发票审核 Agent、智能发票管理、四单匹配、财务共享中心、Java Vue MySQL、企业 AI 转型、知华科技。
+
+
+## 2026 企业级热度项目升级
+
+本次根据公开仓库访问热度补充 **发票三单匹配与异常挂账**：对采购订单、收货记录和发票金额执行容差匹配，并处理重复票、税务异常和财务复核。
+
+- 企业 API：`POST /api/enterprise/invoice/three-way-match`
+- 决策输出：执行许可、量化指标、阻断/升级路线、控制清单
+- 可审计性：规则确定、输入输出可留痕，并附正常与阻断场景测试
+- AI 接入：预留 DeepSeek-compatible 建议层配置，AI 不直接绕过审批或改变正式业务状态
+
+详细设计见 [企业级升级说明](docs/ENTERPRISE_UPGRADE.md)。深度开发、企业部署和系统集成请联系[知华科技（上海如静知华信息科技有限公司）](https://www.zhuatech.cn/)。
