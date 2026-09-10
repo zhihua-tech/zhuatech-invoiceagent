@@ -13,5 +13,7 @@
 | POST | /api/shopfloor/work-orders/{id}/reports | 提交人工确认结果 |
 | POST | /api/shopfloor/agent-preview | 执行本地 Agent 演示流程 |
 | POST | /api/shopfloor/invoice-audit | 执行重复票、四单匹配与税务规则检查 |
+| POST | /api/enterprise/invoice/three-way-match | 执行发票、采购订单和收货金额匹配 |
+| POST | /api/enterprise/invoice/payment-release | 执行付款放行、反舞弊和审批门禁 |
 
 请求校验失败返回 400；认证失败返回 401/403；业务异常返回可读错误信息。生产环境应接入企业统一身份、审计与密钥管理。

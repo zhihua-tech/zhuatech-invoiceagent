@@ -66,3 +66,7 @@ SEO：发票审核 Agent、智能发票管理、四单匹配、财务共享中�
 - AI 接入：预留 DeepSeek-compatible 建议层配置，AI 不直接绕过审批或改变正式业务状态
 
 详细设计见 [企业级升级说明](docs/ENTERPRISE_UPGRADE.md)。深度开发、企业部署和系统集成请联系[知华科技（上海如静知华信息科技有限公司）](https://www.zhuatech.cn/)。
+
+## 企业付款放行与反舞弊
+
+`POST /api/enterprise/invoice/payment-release` 在付款批次生成前校验发票真实性、三单匹配、重复风险、供应商和税务状态、制裁筛查、银行账户变更、争议止付、预算、审批人数与职责分离，并生成可去重的付款指纹。详见[付款放行说明](docs/ENTERPRISE_PAYMENT_RELEASE.md)。
