@@ -8,9 +8,15 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 class InvoiceThreeWayMatchServiceTests {
     private final InvoiceThreeWayMatchService service = new InvoiceThreeWayMatchService();
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void holdsAmountOutsideTolerance() {
         var result = service.match(new InvoiceThreeWayMatchService.Request("INV-9001",
                 new BigDecimal("120000"), new BigDecimal("120000"), new BigDecimal("100000"),
@@ -20,6 +26,9 @@ class InvoiceThreeWayMatchServiceTests {
         assertThat(result.postingAllowed()).isFalse();
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void postsApprovedMatchedInvoice() {
         var result = service.match(new InvoiceThreeWayMatchService.Request("INV-9002",
                 new BigDecimal("100000"), new BigDecimal("100000"), new BigDecimal("99500"),

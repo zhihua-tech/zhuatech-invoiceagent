@@ -1,7 +1,13 @@
 /* Copyright 2026 上海如静知华信息科技有限公司 · https://www.zhuatech.cn/ */
 package cn.zhuatech.invoiceagent.config;
 import cn.zhuatech.invoiceagent.model.*; import cn.zhuatech.invoiceagent.repository.*; import org.springframework.boot.CommandLineRunner; import org.springframework.context.annotation.*; import org.springframework.security.crypto.password.PasswordEncoder; import java.time.LocalDate; import java.util.List;
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Configuration public class DataInitializer {
+ /**
+  * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+  */
  @Bean CommandLineRunner seed(OperatingUnitRepository units,WorkRecordRepository records,ResourceRegisterRepository resources,ReviewRecordRepository reviews,UserRepository users,PasswordEncoder encoder){return args->{if(units.count()>0)return;
   OperatingUnit first=units.save(new OperatingUnit("FIN-AP","应付审核组","财务共享中心",3200)),second=units.save(new OperatingUnit("FIN-TAX","财税规则组","财务中心",1400)),third=units.save(new OperatingUnit("FIN-PROC","采购结算组","供应链中心",1600));
   WorkRecord a=records.save(new WorkRecord("INV-260808-518","INVOICE-SERVICE","云服务采购专票批次",first,120,84,6,LocalDate.now(),WorkRecord.Status.RELEASED,"TAX-V7")); WorkRecord b=records.save(new WorkRecord("INV-260808-477","INVOICE-LOGISTICS","七月物流费用发票",third,98,98,0,LocalDate.now(),WorkRecord.Status.COMPLETED,"TAX-V6")); WorkRecord c=records.save(new WorkRecord("INV-260808-529","INVOICE-EQUIPMENT","生产设备预付款发票",second,42,19,4,LocalDate.now().plusDays(1),WorkRecord.Status.RUNNING,"TAX-V7"));

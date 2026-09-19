@@ -10,9 +10,15 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 class InvoicePaymentReleaseServiceTests {
     private final InvoicePaymentReleaseService service = new InvoicePaymentReleaseService();
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test
     void releasesFullyControlledPayment() {
         var result = service.evaluate(request(Set.of("approver-a", "approver-b"), 2,
@@ -21,6 +27,9 @@ class InvoicePaymentReleaseServiceTests {
         assertThat(result.paymentFingerprint()).hasSize(64);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test
     void requestsMissingIndependentApproval() {
         var result = service.evaluate(request(Set.of("approver-a"), 2,
@@ -29,6 +38,9 @@ class InvoicePaymentReleaseServiceTests {
         assertThat(result.route()).isEqualTo("approval-queue");
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test
     void holdsDisputedOrUnbudgetedPayment() {
         var result = service.evaluate(request(Set.of("approver-a", "approver-b"), 2,
@@ -37,6 +49,9 @@ class InvoicePaymentReleaseServiceTests {
         assertThat(result.actions()).hasSize(2);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test
     void blocksUnverifiedBankChangeAndRequesterApproval() {
         var result = service.evaluate(request(Set.of("requester-a", "approver-b"), 2,
@@ -45,6 +60,9 @@ class InvoicePaymentReleaseServiceTests {
         assertThat(result.blockers()).hasSize(2);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private InvoicePaymentReleaseService.ReleaseRequest request(
             Set<String> approvers, int requiredApprovals, boolean bankChanged,
             boolean bankVerified, boolean hold, boolean budget, boolean sanctionsPassed) {

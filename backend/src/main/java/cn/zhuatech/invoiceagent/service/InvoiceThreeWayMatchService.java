@@ -11,9 +11,16 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 企业发票三单匹配，异常金额进入挂账而不是直接入账。 */
+/**
+ * 企业发票三单匹配，异常金额进入挂账而不是直接入账。
+ *
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class InvoiceThreeWayMatchService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public Decision match(Request request) {
         BigDecimal matchedAmount = request.invoiceAmount().min(request.purchaseOrderAmount())
                 .min(request.goodsReceiptAmount()).setScale(2, RoundingMode.HALF_UP);
@@ -40,6 +47,9 @@ public class InvoiceThreeWayMatchService {
                 Math.min(100, riskScore), route, postingAllowed, List.copyOf(controls));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Request(@NotBlank String invoiceCode,
                           @DecimalMin("0.01") BigDecimal invoiceAmount,
                           @DecimalMin("0") BigDecimal purchaseOrderAmount,
@@ -47,6 +57,9 @@ public class InvoiceThreeWayMatchService {
                           @DecimalMin("0") @DecimalMax("20") BigDecimal tolerancePercent,
                           boolean duplicateRisk, boolean taxRuleMatched, boolean financeApproved) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Decision(String invoiceCode, BigDecimal matchedAmount, BigDecimal holdAmount,
                            BigDecimal variancePercent, int riskScore, String route,
                            boolean postingAllowed, List<String> controls) {}

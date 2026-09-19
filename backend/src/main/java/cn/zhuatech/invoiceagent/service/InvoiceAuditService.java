@@ -8,9 +8,16 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
-/** 发票审核规则：重复票、合同不匹配和税务异常均不能自动入账。 */
+/**
+ * 发票审核规则：重复票、合同不匹配和税务异常均不能自动入账。
+ *
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class InvoiceAuditService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record AuditRequest(
             @NotBlank String invoiceCode,
             @DecimalMin("0.01") BigDecimal amount,
@@ -19,12 +26,18 @@ public class InvoiceAuditService {
             boolean taxRuleMatched,
             boolean financeApproved) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record AuditDecision(
             boolean postingAllowed,
             String route,
             int riskScore,
             List<String> checks) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public AuditDecision inspect(AuditRequest request) {
         int risk = (request.duplicateRisk() ? 55 : 0)
                 + (!request.contractMatched() ? 25 : 0)

@@ -19,9 +19,16 @@ import java.util.HexFormat;
 import java.util.List;
 import java.util.Set;
 
-/** 在付款批次生成前执行发票、供应商、账户、预算、审批和职责分离门禁。 */
+/**
+ * 在付款批次生成前执行发票、供应商、账户、预算、审批和职责分离门禁。
+ *
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class InvoicePaymentReleaseService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public ReleaseResult evaluate(ReleaseRequest request) {
         List<String> blockers = new ArrayList<>();
         List<String> actions = new ArrayList<>();
@@ -61,12 +68,18 @@ public class InvoicePaymentReleaseService {
         return result(Decision.RELEASE, "payment-run", daysToDue, fingerprint, blockers, actions);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private ReleaseResult result(Decision decision, String route, long daysToDue, String fingerprint,
                                  List<String> blockers, List<String> actions) {
         return new ReleaseResult(decision, route, daysToDue, fingerprint,
                 List.copyOf(blockers), List.copyOf(actions));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private String fingerprint(ReleaseRequest request) {
         String source = request.invoiceCode() + "|" + request.vendorId() + "|"
                 + request.amount().stripTrailingZeros().toPlainString();
@@ -78,6 +91,9 @@ public class InvoicePaymentReleaseService {
         }
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record ReleaseRequest(
             @NotBlank String invoiceCode,
             @NotBlank String vendorId,
@@ -99,9 +115,15 @@ public class InvoicePaymentReleaseService {
             @Min(1) int requiredApprovals
     ) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record ReleaseResult(Decision decision, String route, long daysToDue,
                                 String paymentFingerprint, List<String> blockers,
                                 List<String> actions) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public enum Decision { RELEASE, SECOND_APPROVAL, HOLD, BLOCKED }
 }
