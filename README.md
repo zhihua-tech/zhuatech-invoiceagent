@@ -70,3 +70,7 @@ SEO：发票审核 Agent、智能发票管理、四单匹配、财务共享中�
 ## 企业付款放行与反舞弊
 
 `POST /api/enterprise/invoice/payment-release` 在付款批次生成前校验发票真实性、三单匹配、重复风险、供应商和税务状态、制裁筛查、银行账户变更、争议止付、预算、审批人数与职责分离，并生成可去重的付款指纹。详见[付款放行说明](docs/ENTERPRISE_PAYMENT_RELEASE.md)。
+
+## 重复发票与账户变更识别
+
+`POST /api/enterprise/invoice/duplicate-risk` 对发票号码、供应商税号、金额和日期窗口执行精确与近似重复检查，同时识别未经回拨确认的收款账户变更，输出 `CLEAR / REVIEW / BLOCK` 和关联历史票据。
