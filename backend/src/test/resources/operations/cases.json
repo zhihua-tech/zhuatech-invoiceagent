@@ -1,0 +1,68 @@
+[
+  {
+    "patch": {},
+    "expected": {
+      "decision": "PASS",
+      "netInvoiceAmount": "#9000",
+      "unpaidBalance": "#4000"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "credits": "10001"
+    },
+    "expected": {},
+    "error": true
+  },
+  {
+    "patch": {
+      "paid": "9000.01"
+    },
+    "expected": {
+      "decision": "HOLD",
+      "unpaidBalance": "#-0.01"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "accepted": "8999.99"
+    },
+    "expected": {
+      "decision": "REVIEW"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "accepted": "8999.98"
+    },
+    "expected": {
+      "decision": "HOLD"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "paid": "9000"
+    },
+    "expected": {
+      "decision": "PASS",
+      "unpaidBalance": "#0"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "invoiceGross": "0",
+      "credits": "0",
+      "accepted": "0",
+      "paid": "0"
+    },
+    "expected": {
+      "decision": "PASS"
+    },
+    "error": false
+  }
+]
